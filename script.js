@@ -6,35 +6,20 @@
 const choices = ["rock", "paper", "scissors"];
 
 //selects random choice from array 'choices'
-function computerPlay() {
+function getComputerChoice() {
   const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-  console.log(computerChoice);
   return computerChoice;
 }
 //player choice prompt
-function playerChoice() {
+function getPlayerChoice() {
   let input = prompt("Rock, Paper, or Scissors?");
-  while (input == null) {
+  while (input == null || !validateChoice(input)) {
     input = prompt("Rock, Paper, or Scissors?");
   }
   input = input.toLowerCase();
-  check = validateChoice(input);
-  if (check == true) {
-    console.log(input);
-    return input;
-  } else {
-    playerChoice();
-  }
+  return input;
 }
-//Round
-function gameRound(computerChoice, input){
-let player = input;
-let ai = computerChoice;
-if (player == ai) {
-  console.log("Draw!")
-}
-
-}
+//to lower case doesn't seem like it's working now, make sure to ask about it or try and fix it
 
 //validate playerChoice
 function validateChoice(input) {
@@ -43,8 +28,22 @@ function validateChoice(input) {
   }
   return false;
 }
+//Round
+function playGame() {
+  let computerChoice = getComputerChoice();
+  let playerChoice = getPlayerChoice();
+  console.log(playerChoice, computerChoice);
+  if (playerChoice === computerChoice) {
+    console.log("Draw!");
+  } else if (
+    (playerChoice === "rock" && computerChoice === "scissors") ||
+    (playerChoice === "paper" && computerChoice === "rock") ||
+    (playerChoice === "scissors" && computerChoice === "paper")
+  ) {
+    console.log(`You Win! ${playerChoice} beats ${computerChoice}`);
+  } else {
+    console.log(`You Lose! ${computerChoice} beats ${playerChoice}`);
+  }
+}
 //calling functions
-playerChoice();
-computerPlay();
-gameRound();
-//console.log(player == ai);
+playGame();
