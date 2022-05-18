@@ -32,18 +32,32 @@ function validateChoice(input) {
 function playGame() {
   let computerChoice = getComputerChoice();
   let playerChoice = getPlayerChoice();
+  const playerDraw = "Draw!";
+  const playerWin = `You Win! ${playerChoice} beats ${computerChoice}`;
+  const playerLoss = `You Lose! ${computerChoice} beats ${playerChoice}`
   console.log(playerChoice, computerChoice);
   if (playerChoice === computerChoice) {
-    console.log("Draw!");
+    console.log(playerDraw);
+    return playerDraw;
   } else if (
     (playerChoice === "rock" && computerChoice === "scissors") ||
     (playerChoice === "paper" && computerChoice === "rock") ||
     (playerChoice === "scissors" && computerChoice === "paper")
   ) {
-    console.log(`You Win! ${playerChoice} beats ${computerChoice}`);
+    console.log(playerWin);
+    return playerWin;
   } else {
-    console.log(`You Lose! ${computerChoice} beats ${playerChoice}`);
+    console.log(playerLoss);
+    return playerLoss;
   }
 }
+//Multiple Rounds
+function fullGame(){
+  for ( let i = 0; i <= 4; i++){
+    playGame(i)
+  }
+}
+
 //calling functions
-playGame();
+//playGame();
+fullGame();
