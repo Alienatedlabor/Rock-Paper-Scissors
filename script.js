@@ -17,10 +17,7 @@ function getPlayerChoice() {
 
 //validate playerChoice
 function validateChoice(input) {
-  if (choices.includes(input)) {
-    return true;
-  }
-  return false;
+  return choices.includes(input)
 }
 
 //Round
