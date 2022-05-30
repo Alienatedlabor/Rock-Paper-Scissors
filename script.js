@@ -65,4 +65,4 @@ function fullGame() {
 }
 
 //calling functions
-fullGame();
+//fullGame();
