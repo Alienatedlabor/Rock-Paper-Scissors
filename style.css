@@ -5,4 +5,42 @@
 }
 body{
   display: flex;
+  flex-direction: column;
+  background-image: url(/images/woodback.jpeg);
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+h1{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+.button-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+}
+img{
+  max-width: 300px;
+  border-radius: 2px;
+}
+.button-box{
+  display: flex;
+  flex-direction: column;
+}
+button{
+  padding: 1rem;
+  font-size: 16px;
+  border: none;
+  border-radius: 1px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  transition: .2s;
+  margin-top: 1px;
+}
+button:active{
+  box-shadow: none;
+  opacity: 90%;
 }
