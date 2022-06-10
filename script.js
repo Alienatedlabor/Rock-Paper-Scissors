@@ -1,68 +1,55 @@
 const choices = ["rock", "paper", "scissors"];
-
+let playerWinCount = 0;
+let playerLossCount = 0;
+let drawCount = 0;
 //selects random choice from array 'choices'
 function getComputerChoice() {
   const computerChoice = choices[Math.floor(Math.random() * choices.length)];
   return computerChoice;
 }
 
-//player choice prompt
-function getPlayerChoice() {
-  let input = prompt("Rock, Paper, or Scissors?");
-  while (input == null || !validateChoice(input.toLowerCase())) {
-    input = prompt("Rock, Paper, or Scissors?");
-  }
-  return input.toLowerCase();
-}
-
-//validate playerChoice
-function validateChoice(input) {
-  return choices.includes(input)
-}
+//player choice event listener
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    playerChoice = button.id;
+    playGame(playerChoice);
+    updateResultsbox();
+  });
+});
 
 //Round
-function playGame() {
+function playGame(playerChoice) {
   let computerChoice = getComputerChoice();
-  let playerChoice = getPlayerChoice();
   const playerDrawMessage = "Draw!";
   const playerWinMessage = `You Win! ${playerChoice} beats ${computerChoice}`;
   const playerLossMessage = `You Lose! ${computerChoice} beats ${playerChoice}`;
   console.log(playerChoice, computerChoice);
   if (playerChoice === computerChoice) {
-    console.log(playerDrawMessage);
-    return "draw";
+    document.querySelector(".round-results").innerHTML = playerDrawMessage;
+    drawCount++;
   } else if (
     (playerChoice === "rock" && computerChoice === "scissors") ||
     (playerChoice === "paper" && computerChoice === "rock") ||
     (playerChoice === "scissors" && computerChoice === "paper")
   ) {
-    console.log(playerWinMessage);
-    return "win";
+    document.querySelector(".round-results").innerHTML = playerWinMessage;
+    playerWinCount++;
   } else {
-    console.log(playerLossMessage);
-    return "loss";
+    document.querySelector(".round-results").innerHTML = playerLossMessage;
+    playerLossCount++;
   }
 }
 
-//Multiple Rounds & Scoring
-function fullGame() {
-  let playerWinCount = 0;
-  let playerLossCount = 0;
-  let drawCount = 0;
-  for (let i = 0; i <= 4; i++) {
-    let result = playGame(i);
-    if (result == "win") {
-      playerWinCount++;
-      console.log(playerWinCount, playerLossCount, drawCount);
-    } else if (result == "loss") {
-      playerLossCount++;
-      console.log(playerWinCount, playerLossCount, drawCount);
-    } else {
-      drawCount++;
-      console.log(playerWinCount, playerLossCount, drawCount);
-    }
+function updateResultsbox() {
+  document.querySelector(
+    ".results-box"
+  ).innerHTML = `wins: ${playerWinCount}, losses: ${playerLossCount}, draws: ${drawCount}`;
+  if (playerWinCount == 5) {
+    document.querySelector(".results-box").innerHTML =
+      "You win! Refresh the page to play again!";
+  } else if (playerLossCount == 5) {
+    document.querySelector(".results-box").innerHTML =
+      "You lose! Refresh the page to play again!";
   }
 }
-
-//calling functions
-//fullGame();
