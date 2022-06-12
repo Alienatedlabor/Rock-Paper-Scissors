@@ -25,31 +25,34 @@ function playGame(playerChoice) {
   const playerWinMessage = `You Win! ${playerChoice} beats ${computerChoice}`;
   const playerLossMessage = `You Lose! ${computerChoice} beats ${playerChoice}`;
   console.log(playerChoice, computerChoice);
+  const roundResults = document.querySelector(".round-results");
+  roundResults.classList.remove("win-text", "loss-text");
   if (playerChoice === computerChoice) {
-    document.querySelector(".round-results").innerHTML = playerDrawMessage;
+    roundResults.textContent = playerDrawMessage;
     drawCount++;
   } else if (
     (playerChoice === "rock" && computerChoice === "scissors") ||
     (playerChoice === "paper" && computerChoice === "rock") ||
     (playerChoice === "scissors" && computerChoice === "paper")
   ) {
-    document.querySelector(".round-results").innerHTML = playerWinMessage;
+    roundResults.classList.add("win-text");
+    roundResults.textContent = playerWinMessage;
     playerWinCount++;
   } else {
-    document.querySelector(".round-results").innerHTML = playerLossMessage;
+    roundResults.classList.add("loss-text");
+    roundResults.textContent = playerLossMessage;
     playerLossCount++;
   }
 }
 
 function updateResultsbox() {
-  document.querySelector(
-    ".results-box"
-  ).innerHTML = `wins: ${playerWinCount}, losses: ${playerLossCount}, draws: ${drawCount}`;
+  const runningScore = document.querySelector(".results-box")
+  runningScore.textContent = `wins: ${playerWinCount}, losses: ${playerLossCount}, draws: ${drawCount}`;
   if (playerWinCount == 5) {
-    document.querySelector(".results-box").innerHTML =
+    runningScore.textContent =
       "You win! Refresh the page to play again!";
   } else if (playerLossCount == 5) {
-    document.querySelector(".results-box").innerHTML =
+    runningScore.textContent =
       "You lose! Refresh the page to play again!";
   }
 }
