@@ -13,3 +13,5 @@ A simple rock paper scissors game played against the computer.
   <li>CSS3</li>
   <li>Vanilla Javascript</li>
 </ul>
+<strong>Lessons Learned</strong>
+This project was my first substantial work with event listeners and DOM interactivity. 
